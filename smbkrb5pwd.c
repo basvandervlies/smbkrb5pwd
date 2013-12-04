@@ -646,6 +646,20 @@ smbkrb5pwd_cf_func( ConfigArgs *c )
 			}
 			break;
 
+        case PC_SMB_KRB5REALM:
+            if (pi->kerberos_realm)
+               c->value_string = ch_strdup(pi->kerberos_realm);
+            else
+               rc = 1;
+            break;
+
+         case PC_SMB_REQUIREDCLASS:
+             if (pi->oc_requiredObjectclass)
+                 c->value_string = ber_strdup(pi->oc_requiredObjectclass->soc_cname.bv_val);
+             else
+                 rc = 1;
+             break;
+        
 		default:
 			assert( 0 );
 			rc = 1;
